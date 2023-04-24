@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stocks{% endblock %}
+
+{% block button %}
+  <form action="/loggedOut" method="post" class="inline-form">
+    <input type="submit" value="Logout" class="buttons">
+  </form>
+{% endblock %}
+
+{% block body %}
+  <body class="stocks">
+    <h1>Welcome to Stock Market</h1>
+    <div class="container">
+      <div class="stock-class">
+        <div class="display-stock">
+          <div>
+            <button onclick="/showStockForm">Stock Entry</button>
+          </div>
+            <table>
+              <tr>
+                <th>Stock Name</th>
+                <th>Stock Price</th>
+                <th>Created Date</th>
+                <th>Updated Date<</th>
+              </tr>
+            {% for stock in stocks %}
+              <tr>
+                <td>{{ stock.stockName }}</td>
+                <td>{{ stock.price }}</td>
+                <td>{{ stock.createDate }}</td>
+                <td>{{ stock.lastUpdated }}</td>
+                <!--Delete button is displayed only if the entry had been done by current logged in user-->
+                {% if stock.userID == $_SESSION['user'] %}
+                  <td><button onclick="deleteEntry({{ stock.userId }}, {{ stock.id }})">Delete entry</button></td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+            </table>
+          </div>
+      </div>
+    </div>
+  </body> 
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}Stock Entry{% endblock %}
+{% block button %}
+  <form action="/loggedOut" method="post" class="inline-form">
+    <input type="submit" value="Logout" class="buttons">
+  </form>
+{% endblock %}
+{% block body %}
+<body class="upload-body">
+  <div class="upload">
+    <h1>Update stocks</h1>
+    <form method="post" name="update-form" enctype="multipart/form-data" >
+      <div>
+        <label>Stock name</label>
+        <input type="text" name="stockName">
+      </div>
+      <label>Stock price</label>
+        <input type="text" name="stockPrice">
+      </div>
+      <input type="submit" value="Update" class="buttons" id="submitUpdateBtn" name="submitUpdateBtn" onclick="submitUpdate()">
+    </form>  
+    {% if err is defined %}
+      <p id="err">{{ err }}</p>
+    {% endif %}
+    <span id="err"></span>
+    <div class="newDiv"></div>
+  </div> 
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block title %}Stock Entry{% endblock %}
+{% block button %}
+  <form action="/loggedOut" method="post" class="inline-form">
+    <input type="submit" value="Logout" class="buttons">
+  </form>
+{% endblock %}
+{% block body %}
+<body class="upload-body">
+  <div class="upload">
+    <h1>Enter stocks</h1>
+    <form method="post" name="upload-form" enctype="multipart/form-data" action="/addStock">
+      <div>
+        <label>Stock name</label>
+        <input type="text" name="stockName">
+      </div>
+      <label>Stock price</label>
+        <input type="text" name="stockPrice">
+      </div>
+      <input type="submit" value="Upload" class="buttons" id="addStockBtn" name="addStockBtn">
+    </form>  
+    {% if msg is defined %}
+      <p id="err">{{ msg }}</p>
+    {% endif %}
+  </div> 
+  <div>
+    <!--Displaying stocks which have been entered by user previously-->
+    <h2>My Stocks</h2>
+    <table>
+      <tr>
+        <th>Stock name</th>
+        <th>Stock price</th>
+      </tr>
+      {% for stocks in stock %}
+        <tr>
+          <td>{{ stock.stockName }}</td>
+          <td>{{ stock.price }}</td>
+          <td><button onclick="/updateForm" name="updateStockBtn">Edit stock</button></td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <script src="/js/functions.js"></script>
+</body> 
+{% endblock %}
